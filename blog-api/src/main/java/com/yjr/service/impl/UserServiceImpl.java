@@ -11,11 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Random;
 
-/**
- * @author shimh
- * <p>
- * 2018年1月23日
- */
+
 @Service
 public class UserServiceImpl implements UserService {
 

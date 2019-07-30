@@ -15,18 +15,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * 自定义shiroRealm
- *
- * @author shimh
- * <p>
- * 2018年1月23日
- */
+
 public class OAuthRealm extends AuthorizingRealm {
 
     @Autowired
     private UserService userService;
 
+    /**
+     * 权限信息包括角色和权限
+     * @param principals
+     * @return
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String account = (String) principals.getPrimaryPrincipal();

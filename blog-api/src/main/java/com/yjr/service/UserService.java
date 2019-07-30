@@ -4,11 +4,7 @@ import com.yjr.entity.User;
 
 import java.util.List;
 
-/**
- * @author shimh
- * <p>
- * 2018年1月23日
- */
+
 public interface UserService {
 
     List<User> findAll();

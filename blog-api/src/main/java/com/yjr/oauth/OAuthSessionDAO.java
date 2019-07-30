@@ -10,13 +10,7 @@ import org.springframework.beans.factory.InitializingBean;
 
 import java.io.Serializable;
 
-/**
- * 将session保存到redis
- *
- * @author shimh
- * <p>
- * 2018年1月23日
- */
+
 public class OAuthSessionDAO extends CachingSessionDAO implements InitializingBean {
 
     private static Logger logger = LoggerFactory.getLogger(OAuthSessionDAO.class);
@@ -24,17 +18,22 @@ public class OAuthSessionDAO extends CachingSessionDAO implements InitializingBe
     private RedisManager redisManager;
 
 
+    /**
+     *把sessionId和session存到redis中
+     */
     @Override
     protected Serializable doCreate(Session session) {
         Serializable sessionId = generateSessionId(session);
         assignSessionId(session, sessionId);
         logger.info(sessionId.toString());
-
         redisManager.set(sessionId.toString(), session, RedisManager.DEFAULT_EXPIRE);
         return sessionId;
     }
 
-
+    /**
+     * 更新redis中的session
+     * @param session
+     */
     @Override
     protected void doUpdate(Session session) {
         if (session instanceof ValidatingSession && !((ValidatingSession) session).isValid()) {
@@ -44,12 +43,20 @@ public class OAuthSessionDAO extends CachingSessionDAO implements InitializingBe
         redisManager.set(session.getId().toString(), session, RedisManager.DEFAULT_EXPIRE);
     }
 
+    /**
+     * 删除
+     * @param session
+     */
     @Override
     protected void doDelete(Session session) {
         redisManager.delete(session.getId().toString());
     }
 
-
+    /**
+     * 读取
+     * @param sessionId
+     * @return
+     */
     @Override
     protected Session doReadSession(Serializable sessionId) {
         logger.info(sessionId.toString());

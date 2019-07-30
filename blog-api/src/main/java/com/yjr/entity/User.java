@@ -7,13 +7,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * 用户
- *
- * @author shimh
- * <p>
- * 2018年1月23日
- */
+
 @Entity
 @Table(name = "sys_user")
 public class User extends BaseEntity<Long> {

@@ -24,28 +24,33 @@ import java.util.Map;
 public class ShiroConfig {
 
     @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
+        public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+
+        //必须设置securityManager
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
+        //拦截器
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();  
        /* filterChainDefinitionMap.put("/", "anon");  
 
+
+        //anon:所有url都可以匿名访问
         filterChainDefinitionMap.put("/static/**", "anon"); 
         filterChainDefinitionMap.put("/blogFile/**", "anon");
         filterChainDefinitionMap.put("/login", "anon"); 
         filterChainDefinitionMap.put("/register", "anon"); 
         filterChainDefinitionMap.put("/**", "authc"); */
 
+       //authc:所有url必须通过认证才能访问
         //filterChainDefinitionMap.put("/**/create", "authc");
         //filterChainDefinitionMap.put("/**/update", "authc");
         //filterChainDefinitionMap.put("/**/delete", "authc");
         //filterChainDefinitionMap.put("/upload", "authc");
         //filterChainDefinitionMap.put("/users/currentUser", "authc");
-
         filterChainDefinitionMap.put("/**", "anon");
 
-        //返回json数据，由前端跳转
+        //返回json数据，由前端跳转(登录页面)  setSuccessUrl:登录成功页面  setUnauthorizedUrl:未授权页面
         shiroFilterFactoryBean.setLoginUrl("/handleLogin");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
