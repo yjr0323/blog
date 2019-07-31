@@ -43,11 +43,18 @@ public class OAuthRealm extends AuthorizingRealm {
         return authorizationInfo;
     }
 
+    /**
+     * 身份的验证
+     * @param token
+     * @return
+     * @throws AuthenticationException
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
+        //获取用户账号
         String account = (String) token.getPrincipal();
-
+        //通过账号找到User对象
         User user = userService.getUserByAccount(account);
 
         if (user == null) {

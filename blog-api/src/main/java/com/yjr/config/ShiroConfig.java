@@ -41,7 +41,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/login", "anon"); 
         filterChainDefinitionMap.put("/register", "anon"); 
         filterChainDefinitionMap.put("/**", "authc"); */
-
+//        filterChainDefinitionMap.put("/logout","logout");
        //authc:所有url必须通过认证才能访问
         //filterChainDefinitionMap.put("/**/create", "authc");
         //filterChainDefinitionMap.put("/**/update", "authc");
@@ -57,10 +57,18 @@ public class ShiroConfig {
         return shiroFilterFactoryBean;
     }
 
+
+    /**
+     * 凭证匹配器
+     * 密码交给了SimpleAuthenticationInfo进行处理了
+     * @return
+     */
     @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        //散列算法：这里用的是md5
         hashedCredentialsMatcher.setHashAlgorithmName("md5");
+        //散列的次数：md5(md5(""))
         hashedCredentialsMatcher.setHashIterations(2);
         return hashedCredentialsMatcher;
     }
