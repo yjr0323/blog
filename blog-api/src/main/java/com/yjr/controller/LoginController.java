@@ -1,11 +1,15 @@
 package com.yjr.controller;
 
 
+import cn.hutool.captcha.CaptchaUtil;
+import cn.hutool.captcha.LineCaptcha;
 import com.yjr.common.annotation.LogAnnotation;
+import com.yjr.common.cache.RedisManager;
 import com.yjr.common.constant.Base;
 import com.yjr.common.constant.ResultCode;
 import com.yjr.common.result.Result;
 import com.yjr.entity.User;
+import com.yjr.entity.UserLogCheck;
 import com.yjr.oauth.OAuthSessionManager;
 import com.yjr.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -17,26 +21,58 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-/**
- * 登录
- *
- * @author shimh
- * <p>
- * 2018年1月23日
- */
 @RestController
+@CrossOrigin(allowCredentials = "true")
 public class LoginController {
+
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private RedisManager redisManager;
+
+    //获取验证码
+    @GetMapping("/getCheckCode")
+    public Result getCheckCode(HttpServletResponse response){
+
+        Result result = new Result();
+        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(102, 40);
+        String code = lineCaptcha.getCode();
+        Subject subject = SecurityUtils.getSubject();
+        redisManager.set("code",code);
+        try {
+            response.setHeader("Cache-Control", "no-store");
+            response.setHeader("Pragma", "no-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType("image/jpeg");
+            ServletOutputStream outputStream = response.getOutputStream();
+            lineCaptcha.write(outputStream);
+            outputStream.flush();
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+
+        }
+        result.setResultCode(ResultCode.SUCCESS);
+        return result;
+    }
 
     @PostMapping("/login")
-    @LogAnnotation(module = "登录", operation = "登录")
-    public Result login(@RequestBody User user) {
+//    @LogAnnotation(module = "登录", operation = "登录")
+    public Result login(@RequestBody UserLogCheck user) {
         Result r = new Result();
-        executeLogin(user.getAccount(), user.getPassword(), r);
+        String code =(String) redisManager.get("code");
+        if (!code.equals(user.getCode())){
+            r.setResultCode(ResultCode.ERROR);
+            return r;
+        }
+        executeLogin(user.getAccount(), user.getPassword(),r);
         return r;
     }
 
@@ -73,7 +109,6 @@ public class LoginController {
 
         try {
             subject.login(token);
-
             User currentUser = userService.getUserByAccount(account);
             subject.getSession().setAttribute(Base.CURRENT_USER, currentUser);
 
@@ -110,4 +145,6 @@ public class LoginController {
         r.setResultCode(ResultCode.SUCCESS);
         return r;
     }
+
+
 }

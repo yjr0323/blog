@@ -9,13 +9,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Session超时，通知前端删除token
- *
- * @author shimh
- * <p>
- * 2018年1月30日
- */
+
 public class ClearTokenInteceptor extends HandlerInterceptorAdapter {
 
     private static final String SESSION_TIME_OUT_K = "SESSION_TIME_OUT";

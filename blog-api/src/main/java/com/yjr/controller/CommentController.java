@@ -15,13 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * 评论api
- *
- * @author shimh
- * <p>
- * 2018年1月25日
- */
+
 @RestController
 @RequestMapping(value = "/comments")
 public class CommentController {
@@ -29,6 +23,9 @@ public class CommentController {
 
     @Autowired
     private CommentService commentService;
+
+
+
 
     @GetMapping
     @LogAnnotation(module = "评论", operation = "获取所有评论")

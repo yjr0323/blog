@@ -3,6 +3,7 @@ package com.yjr.controller;
 import com.alibaba.fastjson.support.spring.annotation.FastJsonFilter;
 import com.alibaba.fastjson.support.spring.annotation.FastJsonView;
 import com.yjr.common.annotation.LogAnnotation;
+import com.yjr.common.cache.RedisManager;
 import com.yjr.common.constant.Base;
 import com.yjr.common.constant.ResultCode;
 import com.yjr.common.result.Result;
@@ -22,13 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * 文章api
- *
- * @author shimh
- * <p>
- * 2018年1月25日
- */
+
 @RestController
 @RequestMapping(value = "/articles")
 public class ArticleController {
@@ -37,6 +32,8 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
+    @Autowired
+    private RedisManager redisManager;
     @Autowired
     private TagService tagService;
 
@@ -200,6 +197,7 @@ public class ArticleController {
     public Result listArchives() {
         return Result.success(articleService.listArchives());
     }
+
 
 
 }

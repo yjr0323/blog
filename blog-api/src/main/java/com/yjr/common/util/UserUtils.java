@@ -5,11 +5,7 @@ import com.yjr.common.constant.Base;
 import com.yjr.entity.User;
 import org.apache.shiro.SecurityUtils;
 
-/**
- * @author shimh
- * <p>
- * 2018年1月25日
- */
+
 public class UserUtils {
 
     public static User getCurrentUser() {

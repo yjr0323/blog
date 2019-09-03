@@ -21,13 +21,7 @@ import java.util.List;
 
 
 
-/**
- * 全局异常处理器
- *
- * @author shimh
- * <p>
- * 2018年1月23日
- */
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 

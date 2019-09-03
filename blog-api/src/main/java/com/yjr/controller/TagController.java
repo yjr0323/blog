@@ -14,13 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * 标签api
- *
- * @author shimh
- * <p>
- * 2018年1月25日
- */
+
 @RestController
 @RequestMapping(value = "/tags")
 public class TagController {

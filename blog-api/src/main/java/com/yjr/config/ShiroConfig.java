@@ -23,6 +23,9 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
+
+
+
     @Bean
         public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
@@ -95,6 +98,12 @@ public class ShiroConfig {
     public SessionManager sessionManager(OAuthSessionDAO authSessionDAO) {
         OAuthSessionManager oAuthSessionManager = new OAuthSessionManager();
         oAuthSessionManager.setSessionDAO(authSessionDAO);
+        oAuthSessionManager.setSessionIdUrlRewritingEnabled(false);
+
+        oAuthSessionManager.setSessionIdCookieEnabled(true);
+        oAuthSessionManager.getSessionIdCookie().setName("abc");
+        oAuthSessionManager.getSessionIdCookie().setMaxAge(60 * 60 * 1 * 1);
+        oAuthSessionManager.getSessionIdCookie().setHttpOnly(true);
         return oAuthSessionManager;
     }
 
