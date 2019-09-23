@@ -56,8 +56,6 @@ public class LoginController {
             outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-
         }
         result.setResultCode(ResultCode.SUCCESS);
         return result;
