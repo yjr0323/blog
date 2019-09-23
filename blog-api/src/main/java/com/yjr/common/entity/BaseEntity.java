@@ -6,13 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
-/**
- * 基础Entity
- *
- * @author shimh
- * <p>
- * 2018年1月23日
- */
+
 @MappedSuperclass
 public abstract class BaseEntity<ID extends Serializable> implements Serializable {
 

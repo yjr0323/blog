@@ -6,11 +6,7 @@ import com.yjr.vo.PageVo;
 
 import java.util.List;
 
-/**
- * @author shimh
- * <p>
- * 2018年1月25日
- */
+
 public interface ArticleService {
 
     List<Article> listArticles(PageVo page);

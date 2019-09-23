@@ -4,11 +4,7 @@ import com.yjr.entity.Comment;
 
 import java.util.List;
 
-/**
- * @author shimh
- * <p>
- * 2018年1月25日
- */
+
 public interface CommentService {
 
     List<Comment> findAll();

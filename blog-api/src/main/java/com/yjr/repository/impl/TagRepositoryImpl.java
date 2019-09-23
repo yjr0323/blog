@@ -1,24 +1,18 @@
 package com.yjr.repository.impl;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import com.yjr.repository.wrapper.TagWrapper;
 import com.yjr.vo.TagVO;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
 import org.hibernate.type.IntegerType;
-import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
 
 
-/**
- * @author shimh
- * <p>
- * 2018年1月25日
- */
+
 public class TagRepositoryImpl implements TagWrapper {
 
     @PersistenceContext

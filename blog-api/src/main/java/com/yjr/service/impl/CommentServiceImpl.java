@@ -14,11 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author shimh
- * <p>
- * 2018年1月25日
- */
 @Service
 public class CommentServiceImpl implements CommentService {
 

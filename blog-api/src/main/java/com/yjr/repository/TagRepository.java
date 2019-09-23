@@ -1,19 +1,15 @@
 package com.yjr.repository;
 
-import java.util.List;
-
 import com.yjr.entity.Tag;
 import com.yjr.repository.wrapper.TagWrapper;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 
-/**
- * @author shimh
- * <p>
- * 2018年1月25日
- */
+
+
 public interface TagRepository extends JpaRepository<Tag, Integer>, TagWrapper {
 
     @Query(value = "select t.*,count(at.tag_id) as count from me_article_tag at "

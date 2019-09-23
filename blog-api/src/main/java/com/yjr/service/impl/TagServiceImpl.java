@@ -11,11 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 
-/**
- * @author shimh
- * <p>
- * 2018年1月25日
- */
+
 @Service
 public class TagServiceImpl implements TagService {
 

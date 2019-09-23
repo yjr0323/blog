@@ -6,11 +6,7 @@ import com.yjr.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * @author shimh
- * <p>
- * 2018年4月18日
- */
+
 @Service
 public class LogServiceImpl implements LogService {
 
