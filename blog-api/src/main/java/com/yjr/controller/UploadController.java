@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,15 +35,14 @@ public class UploadController {
     private String baseFolderPath;
 
 
-    @GetMapping("/getimg")
-    public Result  getimg(HttpServletResponse response){
+    @GetMapping("/getimg/{filename}/get")
+    public Result  getimg(HttpServletResponse response, @PathVariable("filename") String filename){
         MongoClient mongoClient = new MongoClient("120.78.176.221", 27017);
         // 连接到数据库.如果库不存在则创建
         DB db = mongoClient.getDB("pics");
-
         //文件操作是在DB的基础上实现的，与表和文档没有关系
         GridFS gridFS = new GridFS(db);
-        GridFSDBFile one = gridFS.findOne("Snipaste_2019-09-23_15-43-52.png");
+        GridFSDBFile one = gridFS.findOne(filename);
 
         try {
             response.setHeader("Cache-Control", "no-store");
@@ -69,7 +69,7 @@ public class UploadController {
         Result r = new Result();
 
         try {
-            String name = image.getName();
+            String name = image.getOriginalFilename();
             InputStream imgStream = image.getInputStream();
             MongoClient mongoClient = new MongoClient("120.78.176.221", 27017);
             // 连接到数据库.如果库不存在则创建
