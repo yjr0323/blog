@@ -6,13 +6,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-/**
- * 文章分类
- *
- * @author shimh
- * <p>
- * 2018年1月23日
- */
+
 @Entity
 @Table(name = "me_category")
 public class Category extends BaseEntity<Integer> {

@@ -8,13 +8,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-/**
- * 文章
- *
- * @author shimh
- * <p>
- * 2018年1月23日
- */
+
 @Entity
 @Table(name = "me_article")
 public class Article extends BaseEntity<Integer> {

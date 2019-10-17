@@ -5,11 +5,7 @@ import com.yjr.common.entity.BaseEntity;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * @author shimh
- * <p>
- * 2018年4月18日
- */
+
 @Entity
 @Table(name = "sys_log")
 public class Log extends BaseEntity<Integer> {

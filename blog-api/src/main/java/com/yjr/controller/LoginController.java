@@ -9,7 +9,6 @@ import com.yjr.common.constant.Base;
 import com.yjr.common.constant.ResultCode;
 import com.yjr.common.result.Result;
 import com.yjr.entity.User;
-import com.yjr.entity.UserLogCheck;
 import com.yjr.oauth.OAuthSessionManager;
 import com.yjr.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -63,13 +62,8 @@ public class LoginController {
 
     @PostMapping("/login")
 //    @LogAnnotation(module = "登录", operation = "登录")
-    public Result login(@RequestBody UserLogCheck user) {
+    public Result login(@RequestBody User user) {
         Result r = new Result();
-        String code =(String) redisManager.get("code");
-        if (!code.equals(user.getCode())){
-            r.setResultCode(ResultCode.ERROR);
-            return r;
-        }
         executeLogin(user.getAccount(), user.getPassword(),r);
         return r;
     }

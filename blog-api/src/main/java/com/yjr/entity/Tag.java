@@ -6,13 +6,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-/**
- * 文章标签
- *
- * @author shimh
- * <p>
- * 2018年1月23日
- */
+
 @Entity
 @Table(name = "me_tag")
 public class Tag extends BaseEntity<Integer> {

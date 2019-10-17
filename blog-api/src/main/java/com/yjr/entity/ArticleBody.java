@@ -5,13 +5,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
-/**
- * 文章内容
- *
- * @author shimh
- * <p>
- * 2018年1月23日
- */
+
 @Entity
 @Table(name = "me_article_body")
 public class ArticleBody extends BaseEntity<Long> {

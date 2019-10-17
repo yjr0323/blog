@@ -1,12 +1,5 @@
 package com.yjr.entity;
 
-/**
- * 用户状态
- *
- * @author shimh
- * <p>
- * 2018年1月23日
- */
 public enum UserStatus {
 
     normal("正常状态"), blocked("封禁状态");

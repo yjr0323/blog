@@ -10,13 +10,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-/**
- * 评论
- *
- * @author shimh
- * <p>
- * 2018年1月30日
- */
+
 @Entity
 @Table(name = "me_comment")
 public class Comment extends BaseEntity<Integer> {
